@@ -1,0 +1,15 @@
+<?php
+
+class ArticleController{
+    
+    function index(){
+        echo 'IndexController -> index action';
+    }
+    
+    function view($id){
+        $article = Load::model("articles");
+        print_r($article->get_r);
+        //$row = $article->get_row('*' , " pro_id = $id ");
+       // print_r($row);
+    }
+}

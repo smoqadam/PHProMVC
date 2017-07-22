@@ -1,13 +1,17 @@
 <?php
+defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+defined('ROOT') or define('ROOT', dirname(__FILE__));
+defined('LIB_DIR') or define("LIB_DIR", ROOT . DS . 'library');
+defined('APP_DIR') or define("APP_DIR", ROOT . DS . 'app');
 
-define('DS', DIRECTORY_SEPARATOR);
-define('ROOT', dirname(__FILE__));
-define("LIB_DIR" , ROOT.DS.'library');
-define("APP_DIR" , ROOT.DS.'app');
-error_reporting(E_ALL - E_NOTICE);
+function __autoload($classname)
+{
+    if (file_exists($filename = LIB_DIR . DS . $classname . '.php')) {
+        include $filename;
+    }
+}
+error_reporting(E_ALL);
 
 $url = $_GET['url'];
-include LIB_DIR.DS.'Load.php';
-spl_autoload_register(array('Load', 'autoload'));
 
 Router::route($url);
